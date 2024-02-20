@@ -1,0 +1,34 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+#gameContainer {
+    text-align: center;
+}
+
+#hangmanImage {
+    margin-bottom: 20px;
+}
+
+#wordContainer {
+    font-size: 24px;
+    margin: 20px;
+}
+
+#letterInput {
+    margin-right: 10px;
+}
+
+button {
+    cursor: pointer;
+}
+
+#lives, #guessedLetters {
+    margin-top: 20px;
+}
