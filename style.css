@@ -36,11 +36,14 @@ body {
 }
 
 #wordContainer {
+    object-fit: fill;
+    height: inherit;
     padding: auto;
 }
 
 #letterInput {
     margin-top: 25px;
+    padding-top: 1em;
     width: 4rem;
     height:2rem;
 }
