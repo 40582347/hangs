@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hangman Home Page</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <!-- /*thanks paul -->
-    <link rel="icon" type="image/x-icon" href="https://play-lh.googleusercontent.com/Eg8Swxv4VMMs-l8r0yzCDVX-Mr6RZiztBFieLfdjH9c5Apn4BoOJT4sMC5Vx5gNnfg">
-</head>
-
-    <nav>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://play-lh.googleusercontent.com/Eg8Swxv4VMMs-l8r0yzCDVX-Mr6RZiztBFieLfdjH9c5Apn4BoOJT4sMC5Vx5gNnfg"
+    />
+  </head>
+  <body>
+    <header id="navbar">
+      <nav class="navbar-container">
         <a href="index.html">Home</a>
         <a href="gamePage.html">Games</a>
         <a href="aboutMe.html">About Me</a>
         <p></p>
-    </nav>
-<body>
-    <div id="gameContainer">
-        <h2>HOME</h2>
-            <div class="col-5 hangmanImage;">
-                <img id="hangmanImage" src="images/1.png" alt="Hangman">
+      </nav>
+    </header>
+    <div id="gameContainer" class="gameContainer-flex">
+      <h2>HOME</h2>
+      <div class="game-content">
+        <div class="hangmanImage-container">
+          <div id="lives">Lives: <span>6</span></div>
+          <img id="hangmanImage" src="images/1.png" alt="Hangman" />
+        </div>
+        <div class="right-content">
+          <div class="wordContainer">
+            <div id="guessedLetters">Guessed Letters: <span></span></div>
+          </div>
+
+          <div class="input-letter-container">
+            <div class="displayWord-container">
+              <div id="displayWord">test</div>
             </div>
-            <div class="col-5 wordContainer">
-                 <div id="wordContainer">test</div>
-                <input type="text" id="letterInput" placeholder="Guess a letter" maxlength="1">
-                <button id="guessButton">Guess</button>
-                <button id="startButton">Start</button>
+            <div class="startGame-container">
+              <button id="startButton" class="gameButton">Start</button>
+              <input
+                type="text"
+                id="letterInput"
+                placeholder="Guess a letter"
+                maxlength="1"
+              />
+              <button id="guessButton" class="gameButton">Guess</button>
             </div>
-        <div id="lives">Lives: <span>6</span></div>
-        <div id="guessedLetters">Guessed Letters: <span></span></div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
