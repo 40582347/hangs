@@ -16,6 +16,16 @@ html{
     font-family: 'Courier New', Courier, monospace, 'Times New Roman', Times, serif, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 1rem;
 }
+nav{
+    block-size: auto;
+    float: inherit;
+    display: block;
+    color: aqua;
+    text-align: center;
+    padding: 1%;
+    text-decoration: none;
+    font-size: 1rem;
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -29,9 +39,9 @@ body {
     text-align: center;
 }
 #hangmanImage {
-    width: 50%;
-    height: inherit;
-    object-fit: fill;
+    /* width: 50%; */
+    /* /height: inherit; */
+    /* object-fit: fill; */
     margin-bottom: 20px;
 }
 
