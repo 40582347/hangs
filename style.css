@@ -17,45 +17,63 @@ body {
     background-color: #263dc2;
 }
 body, html{
-    width: 100%;
+    width: 100vw;
     overflow-x: hidden ;
 }
 
-nav{
-    block-size: auto;
-    float: inherit;
-    display: block;
-    color: aqua;
-    text-align: center;
-    padding: 1%;
-    text-decoration: none;
-    font-size: 1rem;
-}
-
-.navbar-container{
+#navbar {
+    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* flex-direction:inherit;
-    flex-wrap: nowrap;
-    overflow: hidden; */
-    background-color: rgba(84, 87, 248, 0.466);
-    overflow: hidden;
+    text-align: center;
+}
+.navbar-container{
+    width: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-.navbar-container a {
-    color:rgb(5, 33, 189);
-    text-align: center;
+.navbar-container ul {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.navbar-container ul li {
+    display: inline-block;
+}
+
+.navbar-container ul li a {
+    display: block;
     padding: 14px 16px;
     text-decoration: none;
+    color: rgb(199, 203, 222);
     font-size: 17px;
 }
 
-.navbar-container a:hover{
+.navbar-container ul li a:hover {
     background-color: #865fe2;
-    color:black;
+    color: black;
+}
+
+.navbar-container li.highlight{
+   
+    background-color:rgb(210, 23, 64);
+    top:46px;
+    height:6px;
+    border-bottom:solid 1px rgb(224, 11, 11);
+    z-index: 1;
+    position: absolute;
+    overflow:hidden;
+    
 
 }
+
+
 
 .gameContainer-flex{
     display: flex;
@@ -190,7 +208,9 @@ box-sizing: border-box;
 }
 
 @media screen and (max-width: 950px) {
+    
     .game-content{
+
         flex-direction: column;
     }
 }
@@ -221,3 +241,9 @@ button {
 #lives, #guessedLetters {
     margin-top: 20px;
 }
+
+
+
+
+
+
