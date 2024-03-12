@@ -21,7 +21,7 @@ body, html{
     overflow-x: hidden ;
 }
 
-#navbar {
+#notNav {
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -84,6 +84,27 @@ body, html{
     margin: 20px;
     text-align: center;
 }
+.lives_levels_container{
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.levels_selector{
+    position: relative;
+    text-align: left;
+    /* padding: 5px; */
+    /* border-radius: 5px; */
+    /* -webkit-border-radius: 5; */
+    /* -moz-border-radius: 5; */
+    /* -ms-border-radius: 5; */
+    /* -o-border-radius: 5; */
+}
 
 .game-content{
     display: flex;
@@ -93,6 +114,8 @@ body, html{
     /* flex-flow: nowrap; */
     margin: 20px;
 }
+
+
 
 .hangmanImage-container{
     position: relative;

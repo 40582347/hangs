@@ -13,7 +13,8 @@
     />
   </head>
   <body>
-    <header id="navbar">
+    <div id="notNav">
+    
       <nav class="navbar-container">
         <ul>
           <li><a name="home" href="index.html">Home</a></li>
@@ -21,12 +22,29 @@
           <li><a href="aboutMe.html">About Me</a></li>
       </ul>
       </nav>
-    </header>
+      </div>
+    
     <div id="gameContainer" class="gameContainer-flex">
       <h2>HOME</h2>
+      <div class="lives_levels_container">
+        <div class="levels_selector">
+            <select>
+                <option value="0">Level: 1</option>
+                <option value="0">Level: 2</option>
+                <option value="0">Level: 3</option>
+                <option value="0">Level: 4</option>
+                <option value="0">Level: 5</option>
+                <option value="0">Level: 6</option>
+                <option value="0">Level: 7</option>
+            </select>
+        </div>
+        <div class="lives_container">
+            <div id="lives">Lives: <span>6</span></div>
+        </div>
+    </div>
       <div class="game-content">
+        
         <div class="hangmanImage-container">
-          <div id="lives">Lives: <span>6</span></div>
           <img id="hangmanImage" src="images/1.png" alt="Hangman" />
         </div>
         <div class="right-content">

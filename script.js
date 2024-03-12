@@ -1,19 +1,20 @@
 // script.js
 //hello world
 
-// document.getElementById("navbar").animate   
+// document.getElementById("notNav").animate   
 /*! Visit www.menucool.com for source code, other menu scripts and web UI controls
 *  Please keep this notice intact. Thank you. */
 
-var navbar = function () {
-    var rebound = 20; //set it to 0 if rebound effect is not prefered
+var notNav = function () {
+    var rebound = 20; // set it to 0 if rebound effect is not preferred
     var slip, k;
     return {
         buildMenu: function () {
-            var m = document.getElementById('navbar');
-            if(!m) return;
+            var m = document.getElementById('notNav');
+            if (!m) return;
             var ul = m.getElementsByTagName("ul")[0];
-            m.style.width = ul.offsetWidth+1+"px";
+            m.style.width = ul.offsetWidth + 1 + "px";
+            m.style.margin = "0 auto"; // Center the navigation bar horizontally
             var items = m.getElementsByTagName("li");
             var a = m.getElementsByTagName("a");
 
@@ -44,10 +45,8 @@ var navbar = function () {
 
             if (k > -1) {
                 slip.style.width = items[k].offsetWidth + "px";
-                //slip.style.left = items[k].offsetLeft + "px";
-                navbar.move(items[k]); //comment out this line and uncomment the line above to disable initial animation
-            }
-            else {
+                notNav.move(items[k]); // comment out this line and uncomment the line above to disable initial animation
+            } else {
                 slip.style.visibility = "hidden";
             }
 
@@ -55,46 +54,48 @@ var navbar = function () {
                 items[i].onmouseover = function () {
                     if (k == -1) slip.style.visibility = "visible";
                     if (this.offsetLeft != slip.offsetLeft) {
-                        navbar.move(this);
+                        notNav.move(this);
                     }
-                }
+                };
             }
 
             m.onmouseover = function () {
-                if (slip.t2)
-                    slip.t2 = clearTimeout(slip.t2);
+                if (slip.t2) slip.t2 = clearTimeout(slip.t2);
             };
 
             m.onmouseout = function () {
                 if (k > -1 && items[k].offsetLeft != slip.offsetLeft) {
-                    slip.t2 = setTimeout(function () { navbar.move(items[k]); }, 50);
+                    slip.t2 = setTimeout(function () {
+                        notNav.move(items[k]);
+                    }, 50);
                 }
-                if (k == -1) slip.t2 = setTimeout(function () { slip.style.visibility = "hidden"; }, 50);
+                if (k == -1) slip.t2 = setTimeout(function () {
+                    slip.style.visibility = "hidden";
+                }, 50);
             };
         },
         move: function (target) {
             clearInterval(slip.timer);
-            var direction = (slip.offsetLeft < target.offsetLeft) ? 1 : -1;
-            slip.timer = setInterval(function () { navbar.mv(target, direction); }, 15);
+            var direction = slip.offsetLeft < target.offsetLeft ? 1 : -1;
+            slip.timer = setInterval(function () {
+                notNav.mv(target, direction);
+            }, 15);
         },
         mv: function (target, direction) {
             if (direction == 1) {
-                if (slip.offsetLeft - rebound < target.offsetLeft)
-                    this.changePosition(target, 1);
+                if (slip.offsetLeft - rebound < target.offsetLeft) this.changePosition(target, 1);
                 else {
                     clearInterval(slip.timer);
                     slip.timer = setInterval(function () {
-                        navbar.recoil(target, 1);
+                        notNav.recoil(target, 1);
                     }, 15);
                 }
-            }
-            else {
-                if (slip.offsetLeft + rebound > target.offsetLeft)
-                    this.changePosition(target, -1);
+            } else {
+                if (slip.offsetLeft + rebound > target.offsetLeft) this.changePosition(target, -1);
                 else {
                     clearInterval(slip.timer);
                     slip.timer = setInterval(function () {
-                        navbar.recoil(target, -1);
+                        notNav.recoil(target, -1);
                     }, 15);
                 }
             }
@@ -105,24 +106,18 @@ var navbar = function () {
                 if (slip.offsetLeft > target.offsetLeft) {
                     slip.style.left = target.offsetLeft + "px";
                     clearInterval(slip.timer);
-                }
-                else slip.style.left = slip.offsetLeft + 2 + "px";
-            }
-            else {
+                } else slip.style.left = slip.offsetLeft + 2 + "px";
+            } else {
                 if (slip.offsetLeft < target.offsetLeft) {
                     slip.style.left = target.offsetLeft + "px";
                     clearInterval(slip.timer);
-                }
-                else slip.style.left = slip.offsetLeft - 2 + "px";
+                } else slip.style.left = slip.offsetLeft - 2 + "px";
             }
         },
         changePosition: function (target, direction) {
             if (direction == 1) {
-                //following +1 will fix the IE8 bug of x+1=x, we force it to x+2
                 slip.style.left = slip.offsetLeft + Math.ceil(Math.abs(target.offsetLeft - slip.offsetLeft + rebound) / 10) + 1 + "px";
-            }
-            else {
-                //following -1 will fix the Opera bug of x-1=x, we force it to x-2
+            } else {
                 slip.style.left = slip.offsetLeft - Math.ceil(Math.abs(slip.offsetLeft - target.offsetLeft + rebound) / 10) - 1 + "px";
             }
         },
@@ -132,16 +127,16 @@ var navbar = function () {
                 if (Math.abs(diff) < 4) slip.style.width = target.offsetWidth + "px";
                 else slip.style.width = slip.offsetWidth - Math.round(diff / 3) + "px";
             }
-        }
+        },
     };
-} ();
+}();
 
 if (window.addEventListener) {
-    window.addEventListener("load", navbar.buildMenu, false);
+    window.addEventListener("load", notNav.buildMenu, false);
 }
 else if (window.attachEvent) {
-    window.attachEvent("onload", navbar.buildMenu);
+    window.attachEvent("onload", notNav.buildMenu);
 }
 else {
-    window["onload"] = navbar.buildMenu;
+    window["onload"] = notNav.buildMenu;
 }
