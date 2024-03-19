@@ -2,6 +2,7 @@
 /* //style */
 *{
     box-sizing: border-box;
+    color: rgb(1, 1, 1);
 }
 
 html{
@@ -14,22 +15,23 @@ body {
     font-family: Arial, sans-serif;
     justify-content: center;
     align-items: center;
-    background-color: #263dc2;
+    background-color: #9a9aa0;
 }
 body, html{
-    width: 100vw;
     overflow-x: hidden ;
+
+
 }
 
 #notNav {
-    width: 100vw;
+    /* width: 100vw; */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 .navbar-container{
-    width: 100;
+    width:45;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,26 +53,24 @@ body, html{
     display: block;
     padding: 14px 16px;
     text-decoration: none;
-    color: rgb(199, 203, 222);
+    color: rgb(222, 224, 235);
     font-size: 17px;
 }
 
 .navbar-container ul li a:hover {
-    background-color: #865fe2;
-    color: black;
+    background-color: #f8bebe;
+    color: rgb(73, 0, 0);
 }
 
 .navbar-container li.highlight{
    
-    background-color:rgb(210, 23, 64);
+    background-color:rgb(11, 10, 10);
     top:46px;
     height:6px;
-    border-bottom:solid 1px rgb(224, 11, 11);
+    border-bottom:solid 1px rgb(49, 1, 44);
     z-index: 1;
     position: absolute;
     overflow:hidden;
-    
-
 }
 
 
@@ -81,23 +81,29 @@ body, html{
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
-    margin: 20px;
+    /* margin: 20px; */
     text-align: center;
+    /* max-height:80%; */
 }
+
 .lives_levels_container{
     position: relative;
     text-align: center;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
+    /* flex-direction: column; */
+    justify-content:flex-start;
+    /* align-items: flex-start; */
     flex-wrap: wrap;
-    margin: 20px;
+    padding:10px;
+    margin: 0px;
 }
 
 .levels_selector{
     position: relative;
+    display: flex;
+    align-items: flex-end;
     text-align: left;
+    align-content: left;
     /* padding: 5px; */
     /* border-radius: 5px; */
     /* -webkit-border-radius: 5; */
@@ -106,15 +112,19 @@ body, html{
     /* -o-border-radius: 5; */
 }
 
+.lives_container{
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+}
+
 .game-content{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
-    /* flex-flow: nowrap; */
-    margin: 20px;
 }
-
 
 
 .hangmanImage-container{
@@ -125,16 +135,9 @@ body, html{
 
 #hangmanImage{
     width: auto;
-    max-width: 600px;
+    max-width: 100%;
     height: auto;
 }
-
-/* .hangmanImage-container{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
-} */
 
 
 #lives{
@@ -153,31 +156,16 @@ body, html{
     flex-direction: column;
     justify-content: flex-end;
 }
+.wordContainer-flex{
+    width: 30vw;
+    min-width: 320px;
 
-.wordContainer{
-    margin-top: 10px;
-    margin-bottom: 400px;
 }
 
-/*.wordContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin-left: 20px;
-}*/
-
-/* .input-letter-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-wrap: wrap;
-    width: auto;
-    margin-top: -20px;
-    /* margin: 25px auto; */
-    /* padding: 20px;
-    box-sizing: border-box; */
-/*} */
+.wordContainer{
+    margin-top: 0px;
+    margin-bottom: 250px;
+}
 
 .input-letter-container{
     display: flex;

@@ -25,7 +25,6 @@
       </div>
     
     <div id="gameContainer" class="gameContainer-flex">
-      <h2>HOME</h2>
       <div class="lives_levels_container">
         <div class="levels_selector">
             <select>
@@ -49,19 +48,20 @@
         </div>
         <div class="right-content">
           <div class="wordContainer">
-            <div id="guessedLetters">Guessed Letters: <span></span></div>
+            <div id="guessedLetters">Guessed Letters: <p id="wrongLetters"><span></span></p></div>
           </div>
 
           <div class="input-letter-container">
             <div class="displayWord-container">
-              <div id="displayWord">test</div>
+              <div id="displayWord"> </div>
             </div>
             <div class="startGame-container">
-              <button id="startButton" class="gameButton">Start</button>
+              <button id="startButton">Start</button>
               <input
                 type="text"
                 id="letterInput"
                 placeholder="Guess a letter"
+                value=" "
                 maxlength="1"
               />
               <button id="guessButton" class="gameButton">Guess</button>
@@ -70,6 +70,8 @@
         </div>
       </div>
     </div>
+   
     <script src="script.js"></script>
+    <script src="scriptNav.js"></script>
   </body>
 </html>

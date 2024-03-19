@@ -1,142 +1,57 @@
-// script.js
-//hello world
+// gameButton
+// var data = '{"level": "man"}','{"level2": "hang"}'
+const textPlace = document.getElementById('displayWord');
+const wrongLettersArea = document.getElementById('wrongLetters');
 
-// document.getElementById("notNav").animate   
-/*! Visit www.menucool.com for source code, other menu scripts and web UI controls
-*  Please keep this notice intact. Thank you. */
+const words = {
+    1: ["able", "about", "account", "acid", "across", "act", "addition"],
+    2: ["hangman", "hands"],
+    3: ["cat", "beautiful"],
+    4: ["software", "development"],
+    5: ["website", "technology"]
+};
 
-var notNav = function () {
-    var rebound = 20; // set it to 0 if rebound effect is not preferred
-    var slip, k;
-    return {
-        buildMenu: function () {
-            var m = document.getElementById('notNav');
-            if (!m) return;
-            var ul = m.getElementsByTagName("ul")[0];
-            m.style.width = ul.offsetWidth + 1 + "px";
-            m.style.margin = "0 auto"; // Center the navigation bar horizontally
-            var items = m.getElementsByTagName("li");
-            var a = m.getElementsByTagName("a");
+let livesLeft = 6;
+// let guessedLetter = '';
+let guessedLetterArray = [];
+let wrongGuesses = 0;
+let answer = '';
 
-            slip = document.createElement("li");
-            slip.className = "highlight";
-            ul.appendChild(slip);
 
-            var url = document.location.href.toLowerCase();
-            k = -1;
-            var nLength = -1;
-            for (var i = 0; i < a.length; i++) {
-                if (url.indexOf(a[i].href.toLowerCase()) != -1 && a[i].href.length > nLength) {
-                    k = i;
-                    nLength = a[i].href.length;
-                }
-            }
-
-            if (k == -1 && /:\/\/(?:www\.)?[^.\/]+?\.[^.\/]+\/?$/.test) {
-                for (var i = 0; i < a.length; i++) {
-                    if (a[i].getAttribute("maptopuredomain") == "true") {
-                        k = i;
-                        break;
-                    }
-                }
-                if (k == -1 && a[0].getAttribute("maptopuredomain") != "false")
-                    k = 0;
-            }
-
-            if (k > -1) {
-                slip.style.width = items[k].offsetWidth + "px";
-                notNav.move(items[k]); // comment out this line and uncomment the line above to disable initial animation
-            } else {
-                slip.style.visibility = "hidden";
-            }
-
-            for (var i = 0; i < items.length - 1; i++) {
-                items[i].onmouseover = function () {
-                    if (k == -1) slip.style.visibility = "visible";
-                    if (this.offsetLeft != slip.offsetLeft) {
-                        notNav.move(this);
-                    }
-                };
-            }
-
-            m.onmouseover = function () {
-                if (slip.t2) slip.t2 = clearTimeout(slip.t2);
-            };
-
-            m.onmouseout = function () {
-                if (k > -1 && items[k].offsetLeft != slip.offsetLeft) {
-                    slip.t2 = setTimeout(function () {
-                        notNav.move(items[k]);
-                    }, 50);
-                }
-                if (k == -1) slip.t2 = setTimeout(function () {
-                    slip.style.visibility = "hidden";
-                }, 50);
-            };
-        },
-        move: function (target) {
-            clearInterval(slip.timer);
-            var direction = slip.offsetLeft < target.offsetLeft ? 1 : -1;
-            slip.timer = setInterval(function () {
-                notNav.mv(target, direction);
-            }, 15);
-        },
-        mv: function (target, direction) {
-            if (direction == 1) {
-                if (slip.offsetLeft - rebound < target.offsetLeft) this.changePosition(target, 1);
-                else {
-                    clearInterval(slip.timer);
-                    slip.timer = setInterval(function () {
-                        notNav.recoil(target, 1);
-                    }, 15);
-                }
-            } else {
-                if (slip.offsetLeft + rebound > target.offsetLeft) this.changePosition(target, -1);
-                else {
-                    clearInterval(slip.timer);
-                    slip.timer = setInterval(function () {
-                        notNav.recoil(target, -1);
-                    }, 15);
-                }
-            }
-            this.changeWidth(target);
-        },
-        recoil: function (target, direction) {
-            if (direction == -1) {
-                if (slip.offsetLeft > target.offsetLeft) {
-                    slip.style.left = target.offsetLeft + "px";
-                    clearInterval(slip.timer);
-                } else slip.style.left = slip.offsetLeft + 2 + "px";
-            } else {
-                if (slip.offsetLeft < target.offsetLeft) {
-                    slip.style.left = target.offsetLeft + "px";
-                    clearInterval(slip.timer);
-                } else slip.style.left = slip.offsetLeft - 2 + "px";
-            }
-        },
-        changePosition: function (target, direction) {
-            if (direction == 1) {
-                slip.style.left = slip.offsetLeft + Math.ceil(Math.abs(target.offsetLeft - slip.offsetLeft + rebound) / 10) + 1 + "px";
-            } else {
-                slip.style.left = slip.offsetLeft - Math.ceil(Math.abs(slip.offsetLeft - target.offsetLeft + rebound) / 10) - 1 + "px";
-            }
-        },
-        changeWidth: function (target) {
-            if (slip.offsetWidth != target.offsetWidth) {
-                var diff = slip.offsetWidth - target.offsetWidth;
-                if (Math.abs(diff) < 4) slip.style.width = target.offsetWidth + "px";
-                else slip.style.width = slip.offsetWidth - Math.round(diff / 3) + "px";
-            }
-        },
-    };
-}();
-
-if (window.addEventListener) {
-    window.addEventListener("load", notNav.buildMenu, false);
+function getRandomWord() {
+    var randomNum = Math.floor(Math.random() * 5) + 1;
+    var wordGetter = words[randomNum];
+    var randomIndex = Math.floor(Math.random() * wordGetter.length);
+    var answer = wordGetter[randomIndex];
+    return answer;
 }
-else if (window.attachEvent) {
-    window.attachEvent("onload", notNav.buildMenu);
+
+function getDisplayWord() {
+    randWord = getRandomWord();
+    randWordUnder = randWord.replace(/[a-z]/g, ' _ ');
+    textPlace.innerText = randWordUnder;
 }
-else {
-    window["onload"] = notNav.buildMenu;
+
+document.getElementById('startButton').addEventListener('click', getDisplayWord);
+
+
+function updateHangmanImage(){
+    document.getElementById('hangmanImage').src = './images/'+ wrongGuesses + '.png';
 }
+
+function getGuessedLetter(){
+    var inputLetter = document.getElementById('letterInput').value;
+    // var guessedLetter = inputLetter.value;
+    return inputLetter;
+}
+
+function printGuessedLetter(){
+    var guessedLetter = getGuessedLetter();
+    guessedLetterArray.push(guessedLetter);
+    wrongLettersArea.innerText = guessedLetterArray.join(', ');
+    document.getElementById('letterInput').value = "";
+    document.getElementById('letterInput').focus();
+}
+
+
+document.getElementById('guessButton').addEventListener("click", printGuessedLetter);
