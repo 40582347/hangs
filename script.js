@@ -22,11 +22,11 @@ const words = {
     5: ["website", "technology"]
 };
 
-let livesLeft = 6;
-// let guessedLetter = '';
-let guessedLetterArray = [];
-let wrongGuesses = 0;
-let answer = '';
+// let livesLeft = 6;
+// // let guessedLetter = '';
+// let guessedLetterArray = [];
+// let wrongGuesses = 0;
+// let answer = '';
 
 
 function getRandomWord() {
@@ -38,17 +38,20 @@ function getRandomWord() {
 }
 
 function initializeGame(){
+    answer = '';
     guessedLetterArray = []
     wrongGuesses =0;
     livesLeft =6;
     level = 1;
-    updateHangmanImage();
-    
-    // wrongLettersArea.innerText='';
+    wrongLettersArea.innerText= '';
+    document.getElementById('letterInput').disabled = false;
     document.getElementById('letterInput').value = '';
     document.getElementById('levels_selector').value = level;
     answer = getRandomWord();
     getDisplayWord();
+    updateHangmanImage();
+
+    // printGuessedLetter();
 
 }
 
@@ -67,12 +70,26 @@ function getDisplayWord() {
     document.getElementById('letterInput').focus();
 }
 
+function stillAlive(){
+    if (livesLeft > 0){
+        document.getElementById('letterInput').disabled = false;
+    }
+    else{
+    document.getElementById('letterInput').disabled = true;
+}
+}
+
+
 function updateHangmanImage(){
     document.getElementById('hangmanImage').src = './images/'+ wrongGuesses + '.png';
 }
 
 function isValid(letter){
     return guessedLetterArray.indexOf(letter) === -1;
+}
+
+function isWrong(guessedLetter){
+    return !answer.includes(guessedLetter);
 }
 
 function getGuessedLetter(){
@@ -87,11 +104,21 @@ function printGuessedLetter(){
         guessedLetterArray.push(guessedLetter);
         wrongLettersArea.innerText = guessedLetterArray.join(', ');
         getDisplayWord();
+        if(isWrong(guessedLetter))
+        {
+            wrongGuesses++;
+            livesLeft--;
+        }
+        if(stillAlive()){
+            document.getElementById('letterInput').disabled = true;
+        }
+
     }
     else{
         document.getElementById('letterInput').value = '';
         alert("Letter " + guessedLetter.toUpperCase() + " has already been guessed");
     }
+    updateHangmanImage();
     document.getElementById('letterInput').value = '';
     document.getElementById('letterInput').focus();
 }
