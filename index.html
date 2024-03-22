@@ -27,14 +27,14 @@
     <div id="gameContainer" class="gameContainer-flex">
       <div class="lives_levels_container">
         <div class="levels_selector">
-            <select>
-                <option value="0">Level: 1</option>
-                <option value="0">Level: 2</option>
-                <option value="0">Level: 3</option>
-                <option value="0">Level: 4</option>
-                <option value="0">Level: 5</option>
-                <option value="0">Level: 6</option>
-                <option value="0">Level: 7</option>
+            <select id="levels_selector">
+                <option value="1">Level: 1</option>
+                <option value="2">Level: 2</option>
+                <option value="3">Level: 3</option>
+                <option value="4">Level: 4</option>
+                <option value="5">Level: 5</option>
+                <option value="6">Level: 6</option>
+                <option value="7">Level: 7</option>
             </select>
         </div>
         <div class="lives_container">
@@ -61,7 +61,7 @@
                 type="text"
                 id="letterInput"
                 placeholder="Guess a letter"
-                value=" "
+                value=""
                 maxlength="1"
               />
               <button id="guessButton" class="gameButton">Guess</button>

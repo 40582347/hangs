@@ -1,7 +1,18 @@
-// gameButton
-// var data = '{"level": "man"}','{"level2": "hang"}'
+
+//     https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
+// event handler to handle the enter button being clicked from the keyboard instead of mouse action
+document.getElementById('guessButton').addEventListener("click", printGuessedLetter);
+document.getElementById('startButton').addEventListener('click', initializeGame);
+
+// an event handler to check the key being entered is alphabetical using a regex and event.key
+document.getElementById('letterInput').addEventListener('keypress', function(event){
+    if (!/^[a-zA-Z]$/.test(event.key) && event.key !== 'Backspace'){
+        event.preventDefault();
+    }});
+
 const textPlace = document.getElementById('displayWord');
 const wrongLettersArea = document.getElementById('wrongLetters');
+const hangmanImage = document.getElementById('hangmanImage');
 
 const words = {
     1: ["able", "about", "account", "acid", "across", "act", "addition"],
@@ -26,17 +37,42 @@ function getRandomWord() {
     return answer;
 }
 
-function getDisplayWord() {
-    randWord = getRandomWord();
-    randWordUnder = randWord.replace(/[a-z]/g, ' _ ');
-    textPlace.innerText = randWordUnder;
+function initializeGame(){
+    guessedLetterArray = []
+    wrongGuesses =0;
+    livesLeft =6;
+    level = 1;
+    updateHangmanImage();
+    
+    // wrongLettersArea.innerText='';
+    document.getElementById('letterInput').value = '';
+    document.getElementById('levels_selector').value = level;
+    answer = getRandomWord();
+    getDisplayWord();
+
 }
 
-document.getElementById('startButton').addEventListener('click', getDisplayWord);
-
+function getDisplayWord() {
+    var displayWord = '';
+    for (var i = 0; i < answer.length; i++) {
+        var currentChar = answer[i];
+        if (guessedLetterArray.includes(currentChar)) {
+            displayWord += currentChar + ' ';
+        } else {
+            displayWord += '_ ';
+        }
+    }
+    textPlace.innerText = displayWord.trim();
+    document.getElementById('letterInput').value = '';
+    document.getElementById('letterInput').focus();
+}
 
 function updateHangmanImage(){
     document.getElementById('hangmanImage').src = './images/'+ wrongGuesses + '.png';
+}
+
+function isValid(letter){
+    return guessedLetterArray.indexOf(letter) === -1;
 }
 
 function getGuessedLetter(){
@@ -46,12 +82,26 @@ function getGuessedLetter(){
 }
 
 function printGuessedLetter(){
-    var guessedLetter = getGuessedLetter();
-    guessedLetterArray.push(guessedLetter);
-    wrongLettersArea.innerText = guessedLetterArray.join(', ');
-    document.getElementById('letterInput').value = "";
+    var guessedLetter = getGuessedLetter().toLowerCase();
+    if(isValid(guessedLetter)){
+        guessedLetterArray.push(guessedLetter);
+        wrongLettersArea.innerText = guessedLetterArray.join(', ');
+        getDisplayWord();
+    }
+    else{
+        document.getElementById('letterInput').value = '';
+        alert("Letter " + guessedLetter.toUpperCase() + " has already been guessed");
+    }
+    document.getElementById('letterInput').value = '';
     document.getElementById('letterInput').focus();
 }
 
 
-document.getElementById('guessButton').addEventListener("click", printGuessedLetter);
+// set up variable to handle the action of the enter key being pressed
+var guessButtonEnter = document.getElementById('letterInput').addEventListener('keypress', function(event){
+    if(event.key === 'Enter'){
+        event.preventDefault();
+        document.getElementById('guessButton').click()
+    }
+});
+
