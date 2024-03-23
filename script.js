@@ -44,6 +44,7 @@ function initializeGame(){
     livesLeft =6;
     level = 1;
     wrongLettersArea.innerText= '';
+    document.getElementById('startButton').disabled = true;
     document.getElementById('letterInput').disabled = false;
     document.getElementById('letterInput').value = '';
     document.getElementById('levels_selector').value = level;
@@ -72,10 +73,16 @@ function getDisplayWord() {
 
 function stillAlive(){
     if (livesLeft > 0){
+        
         document.getElementById('letterInput').disabled = false;
     }
     else{
-    document.getElementById('letterInput').disabled = true;
+        document.getElementById('hangmanImage').src = './images/6.png';
+        alert("The Word Is " + answer.toUpperCase())
+        document.getElementById('letterInput').disabled = true;
+        document.getElementById('startButton').disabled = false;
+        wrongLettersArea.innerText= '';
+        textPlace.innerText = '';
 }
 }
 
