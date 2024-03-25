@@ -13,6 +13,8 @@ document.getElementById('letterInput').addEventListener('keypress', function(eve
 const textPlace = document.getElementById('displayWord');
 const wrongLettersArea = document.getElementById('wrongLetters');
 const hangmanImage = document.getElementById('hangmanImage');
+const livesLeftNumb = document.getElementById('numLives');
+
 
 const words = {
     1: ["able", "about", "account", "acid", "across", "act", "addition"],
@@ -48,6 +50,7 @@ function initializeGame(){
     document.getElementById('letterInput').disabled = false;
     document.getElementById('letterInput').value = '';
     document.getElementById('levels_selector').value = level;
+    livesLeftNumb.innerText = livesLeft;
     answer = getRandomWord();
     getDisplayWord();
     updateHangmanImage();
@@ -77,18 +80,20 @@ function stillAlive(){
         document.getElementById('letterInput').disabled = false;
     }
     else{
-        document.getElementById('hangmanImage').src = './images/6.png';
-        alert("The Word Is " + answer.toUpperCase())
         document.getElementById('letterInput').disabled = true;
         document.getElementById('startButton').disabled = false;
         wrongLettersArea.innerText= '';
         textPlace.innerText = '';
+        
 }
 }
 
 
 function updateHangmanImage(){
     document.getElementById('hangmanImage').src = './images/'+ wrongGuesses + '.png';
+    if(wrongGuesses === 6){
+        sendAlert();
+    }
 }
 
 function isValid(letter){
@@ -126,6 +131,7 @@ function printGuessedLetter(){
         alert("Letter " + guessedLetter.toUpperCase() + " has already been guessed");
     }
     updateHangmanImage();
+    // sendAlert();
     document.getElementById('letterInput').value = '';
     document.getElementById('letterInput').focus();
 }
@@ -139,3 +145,6 @@ var guessButtonEnter = document.getElementById('letterInput').addEventListener('
     }
 });
 
+function sendAlert(){
+    alert("The Word Is " + answer.toUpperCase())
+}
