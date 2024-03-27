@@ -10,6 +10,15 @@ document.getElementById('letterInput').addEventListener('keypress', function(eve
         event.preventDefault();
     }});
 
+function levelListSelection(){
+    var e = document.getElementById('levels_selector');
+    if(e.selectedIndex > 0){
+        level = parseInt(e.options[e.selectedIndex].value);
+        initializeGame();
+    }
+}
+document.getElementById('levels_selector').addEventListener('change', levelListSelection);
+
 const textPlace = document.getElementById('displayWord');
 const wrongLettersArea = document.getElementById('wrongLetters');
 const hangmanImage = document.getElementById('hangmanImage');
@@ -24,16 +33,9 @@ const words = {
     5: ["website", "technology"]
 };
 
-// let livesLeft = 6;
-// // let guessedLetter = '';
-// let guessedLetterArray = [];
-// let wrongGuesses = 0;
-// let answer = '';
-
-
 function getRandomWord() {
-    var randomNum = Math.floor(Math.random() * 5) + 1;
-    var wordGetter = words[randomNum];
+    // var randomNum = Math.floor(Math.random() * 5) + 1;
+    var wordGetter = words[level];
     var randomIndex = Math.floor(Math.random() * wordGetter.length);
     var answer = wordGetter[randomIndex];
     return answer;
@@ -44,19 +46,24 @@ function initializeGame(){
     guessedLetterArray = []
     wrongGuesses =0;
     livesLeft =6;
-    level = 1;
+    getLevel();
+    // level = parseInt(document.getElementById('levels_selector').value); // Update the level variable
     wrongLettersArea.innerText= '';
     document.getElementById('startButton').disabled = true;
     document.getElementById('letterInput').disabled = false;
     document.getElementById('letterInput').value = '';
-    document.getElementById('levels_selector').value = level;
+    // document.getElementById('levels_selector').value = level;
     livesLeftNumb.innerText = livesLeft;
     answer = getRandomWord();
     getDisplayWord();
     updateHangmanImage();
+    
+}
 
-    // printGuessedLetter();
-
+function getLevel(){
+    level = parseInt(document.getElementById('levels_selector').value);
+    document.getElementById('levels_selector').value = level;
+    return level;
 }
 
 function getDisplayWord() {
@@ -90,9 +97,11 @@ function stillAlive(){
 
 
 function updateHangmanImage(){
-    document.getElementById('hangmanImage').src = './images/'+ wrongGuesses + '.png';
     if(wrongGuesses === 6){
-        sendAlert();
+        document.getElementById('hangmanImage').src = './images/6.png';
+        setTimeout(sendAlert, 100); // Call the sendAlert function to show the alert
+    } else {
+        document.getElementById('hangmanImage').src = './images/'+ wrongGuesses + '.png';
     }
 }
 
@@ -102,6 +111,18 @@ function isValid(letter){
 
 function isWrong(guessedLetter){
     return !answer.includes(guessedLetter);
+}
+
+function isCorrectWord(){
+    var displayedCorrectWord = textPlace.innerText.replace(/\s/g, '');
+    if(displayedCorrectWord === answer)
+    {
+        document.getElementById('startButton').disabled = false;
+        document.getElementById('letterInput').disabled = true;
+        
+        setTimeout(sendAlert, 100);
+        
+    }
 }
 
 function getGuessedLetter(){
@@ -120,10 +141,13 @@ function printGuessedLetter(){
         {
             wrongGuesses++;
             livesLeft--;
+            livesLeftNumb.innerText = livesLeft
         }
+        
         if(stillAlive()){
             document.getElementById('letterInput').disabled = true;
         }
+        isCorrectWord();
 
     }
     else{
@@ -146,5 +170,15 @@ var guessButtonEnter = document.getElementById('letterInput').addEventListener('
 });
 
 function sendAlert(){
-    alert("The Word Is " + answer.toUpperCase())
+    if(livesLeft === 0){
+        alert("The Word Is " + answer.toUpperCase())
+    }
+    
+    else if(textPlace.innerText.replace(/\s/g, '') === answer){
+        alert('You Win, The Correct Word Was ' + answer.toUpperCase() + '!!!');
+        level++;
+        document.getElementById('levels_selector').value = level;
+        initializeGame();
+
+    }
 }
